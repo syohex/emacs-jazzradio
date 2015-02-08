@@ -122,9 +122,9 @@
 
 (defun jazzradio--current-playing-channel ()
   (cl-loop for entry in tabulated-list-entries
-           for status = (jazzradio-channel-status (car entry))
+           for channel = (car entry)
            when (jazzradio--playing-p channel)
-           return (car entry)))
+           return channel))
 
 (defun jazzradio--play ()
   (interactive)
