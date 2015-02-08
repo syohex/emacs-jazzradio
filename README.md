@@ -23,6 +23,8 @@ Show channel list.
 
 | Key        | Command            |
 |:-----------|:-------------------|
-| `s`, `RET` | Play channel       |
-| `S`        | Stop channel       |
+| `RET`      | Play channel       |
+| `U`        | Stop channel       |
 | `SPC`      | Toggle pause/play  |
+| `9`        | Decrease volume    |
+| `0`        | Increase volume    |
