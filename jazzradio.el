@@ -84,7 +84,7 @@
                                      `[,(jazzradio-channel-name channel)
                                        ""
                                        ,(jazzradio-channel-description channel)]))))
-        (setq jazzradio--collect-channels entries)
+        (setq jazzradio--channels-cache entries)
         (setq tabulated-list-entries entries))))
 
 (defsubst jazzradio--status-to-string (status)
