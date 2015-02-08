@@ -10,7 +10,8 @@ This is Emacs port of [jazzradio.vim](https://github.com/supermomonga/jazzradio.
 ## Requirements
 
 - Emacs 24.1 or higher
-
+- mplayer
+- curl
 
 ## Basic Usage
 
