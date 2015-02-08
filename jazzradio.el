@@ -176,13 +176,22 @@
         (pause (jazzradio--update-status channel 'play)))
       (tabulated-list-print t))))
 
+(defun jazzradio--volume-decrease ()
+  (interactive)
+  (jazzradio--mplayer-send "volume -1"))
+
+(defun jazzradio--volume-increase ()
+  (interactive)
+  (jazzradio--mplayer-send "volume 1"))
+
 (defvar jazzradio-menu-mode-map
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map tabulated-list-mode-map)
     (define-key map (kbd "RET") 'jazzradio--play)
-    (define-key map (kbd "s") 'jazzradio--play)
-    (define-key map (kbd "S") 'jazzradio--stop)
+    (define-key map (kbd "U") 'jazzradio--stop)
     (define-key map (kbd "SPC") 'jazzradio--toggle-pause)
+    (define-key map (kbd "9") 'jazzradio--volume-decrease)
+    (define-key map (kbd "0") 'jazzradio--volume-increase)
     map)
   "Local keymap for `jazzradio-menu-mode' buffers.")
 
