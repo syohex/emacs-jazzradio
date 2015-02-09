@@ -215,12 +215,14 @@
 (defun jazzradio ()
   "Show channels menu."
   (interactive)
-  (let ((buf (get-buffer-create "*jazzradio*")))
-    (with-current-buffer buf
-      (jazzradio--refresh)
-      (jazzradio-menu-mode)
-      (tabulated-list-print t)
-      (switch-to-buffer buf))))
+  (let ((buf (get-buffer "*jazzradio*")))
+    (if (and buf jazzradio--process)
+        (switch-to-buffer buf)
+      (with-current-buffer (get-buffer-create "*jazzradio*")
+        (jazzradio--refresh)
+        (jazzradio-menu-mode)
+        (tabulated-list-print t)
+        (switch-to-buffer (current-buffer))))))
 
 (provide 'jazzradio)
 
