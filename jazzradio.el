@@ -109,7 +109,7 @@
                  else
                  collect
                  (let ((columns (cadr entry)))
-                   (setf (aref columns 1) "")
+                   (aset columns 1 "")
                    entry))))
 
 (defsubst jazzradio--play-playlist-url (channel)
