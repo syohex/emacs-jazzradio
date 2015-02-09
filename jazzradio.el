@@ -211,18 +211,27 @@
   ;;(add-hook 'tabulated-list-revert-hook 'jazzradio--refresh nil t)
   (tabulated-list-init-header))
 
-;;;###autoload
-(defun jazzradio ()
-  "Show channels menu."
-  (interactive)
+(defun jazzradio--common (buffer-func)
   (let ((buf (get-buffer "*jazzradio*")))
     (if (and buf jazzradio--process)
-        (switch-to-buffer buf)
+        (funcall buffer-func buf)
       (with-current-buffer (get-buffer-create "*jazzradio*")
         (jazzradio--refresh)
         (jazzradio-menu-mode)
         (tabulated-list-print t)
-        (switch-to-buffer (current-buffer))))))
+        (funcall buffer-func (current-buffer))))))
+
+;;;###autoload
+(defun jazzradio ()
+  "Show channels menu."
+  (interactive)
+  (jazzradio--common 'switch-to-buffer))
+
+;;;###autoload
+(defun jazzradio-pop-to-buffer ()
+  "Popup channels menu."
+  (interactive)
+  (jazzradio--common 'pop-to-buffer))
 
 (provide 'jazzradio)
 
