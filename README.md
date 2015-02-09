@@ -19,6 +19,10 @@ This is Emacs port of [jazzradio.vim](https://github.com/supermomonga/jazzradio.
 
 Show channel list.
 
+#### `jazzradio-pop-to-buffer`
+
+Pop up buffer version
+
 ## Key Bindings
 
 | Key        | Command            |
