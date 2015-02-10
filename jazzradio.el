@@ -36,8 +36,11 @@
   "Face for highlighting query replacement matches."
   :group 'jazzradio)
 
-(defconst jazzradio--channel-url
+(defvar jazzradio--channel-url
   "http://ephemeron:dayeiph0ne%40pp@api.audioaddict.com/v1/jazzradio/mobile/batch_update?stream_set_key=")
+
+(defvar jazzradio--playlist-url
+  "http://listen.jazzradio.com/webplayer/")
 
 (defvar jazzradio--process nil)
 (defvar jazzradio--channels-cache nil)
@@ -54,7 +57,7 @@
              (make-jazzradio-channel
               :id (assoc-default 'id channel)
               :key key
-              :playlist (concat "http://listen.jazzradio.com/webplayer/"
+              :playlist (concat jazzradio--playlist-url
                                 key ".pls")
               :name (assoc-default 'name channel)
               :description (assoc-default 'description channel)))))
