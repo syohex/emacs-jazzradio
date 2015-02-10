@@ -31,16 +31,22 @@
   "Interface of `http://www.jazzradio.com/'."
   :group 'music)
 
+(defcustom jazzradio-channel-url
+  "http://ephemeron:dayeiph0ne%40pp@api.audioaddict.com/v1/jazzradio/mobile/batch_update?stream_set_key="
+  "Channel list URL."
+  :type 'string
+  :group 'jazzradio)
+
+(defcustom jazzradio-playlist-base-url
+  "http://listen.jazzradio.com/webplayer/"
+  "Base URL of playlist."
+  :type 'string
+  :group 'jazzradio)
+
 (defface jazzradio-status
   '((t (:foreground "yellow")))
   "Face for highlighting query replacement matches."
   :group 'jazzradio)
-
-(defvar jazzradio--channel-url
-  "http://ephemeron:dayeiph0ne%40pp@api.audioaddict.com/v1/jazzradio/mobile/batch_update?stream_set_key=")
-
-(defvar jazzradio--playlist-url
-  "http://listen.jazzradio.com/webplayer/")
 
 (defvar jazzradio--process nil)
 (defvar jazzradio--channels-cache nil)
@@ -57,15 +63,15 @@
              (make-jazzradio-channel
               :id (assoc-default 'id channel)
               :key key
-              :playlist (concat jazzradio--playlist-url
+              :playlist (concat jazzradio-playlist-base-url
                                 key ".pls")
               :name (assoc-default 'name channel)
               :description (assoc-default 'description channel)))))
 
 (defun jazzradio--collect-channels ()
   (with-temp-buffer
-    (unless (zerop (process-file "curl" nil t nil "-s" jazzradio--channel-url))
-      (error "Can't get '%s'" jazzradio--channel-url))
+    (unless (zerop (process-file "curl" nil t nil "-s" jazzradio-channel-url))
+      (error "Can't get '%s'" jazzradio-channel-url))
     (let ((response (json-read-from-string
                      (buffer-substring-no-properties (point-min) (point-max)))))
       (jazzradio--parse-channels-response response))))
