@@ -85,16 +85,16 @@
                return channel))))
 
 (defun jazzradio--refresh ()
-  (or jazzradio--channels-cache
-      (let* ((channels (jazzradio--collect-channels))
-             (entries (cl-loop for channel in channels
-                               collect
-                               (list channel
-                                     `[,(jazzradio-channel-name channel)
-                                       ""
-                                       ,(jazzradio-channel-description channel)]))))
-        (setq jazzradio--channels-cache entries)
-        (setq tabulated-list-entries entries))))
+  (setq tabulated-list-entries
+        (or jazzradio--channels-cache
+            (let* ((channels (jazzradio--collect-channels))
+                   (entries (cl-loop for channel in channels
+                                     collect
+                                     (list channel
+                                           `[,(jazzradio-channel-name channel)
+                                             ""
+                                             ,(jazzradio-channel-description channel)]))))
+              (setq jazzradio--channels-cache entries)))))
 
 (defsubst jazzradio--status-to-string (status)
   (cl-case status
