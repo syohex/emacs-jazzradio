@@ -167,6 +167,7 @@
         (message "%s is not playing now" name)
       (when (y-or-n-p (format "Stop '%s' ?" name))
         (kill-process jazzradio--process)
+        (setq jazzradio--process nil)
         (jazzradio--update-status channel nil)
         (tabulated-list-print t)))))
 
